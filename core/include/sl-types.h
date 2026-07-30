@@ -40,29 +40,29 @@ typedef enum
 {
     SL_TYPES
         SL_TYPES_COUNT
-} type_tag;
+} sl_type_tag;
 #undef X
 
 /* ---- Lookup table for type sizes in BYTES ---- */
 #define X(tag, ctype, alias, name) [TYPE_##tag] = sizeof(ctype),
-static const uos type_sizes[] = {SL_TYPES};
+static const uos sl_type_sizes[] = {SL_TYPES};
 #undef X
 
 /* ---- Lookup table for type names ---- */
 #define X(tag, ctype, alias, name) [TYPE_##tag] = name,
-static const char *type_names[] = {SL_TYPES};
+static const char *sl_type_names[] = {SL_TYPES};
 #undef X
 
 /* ---- Helper: Function that returns a size of the variable from a table ---- */
-static inline const uos sl_get_type_size(type_tag tag)
+static inline const uos sl_get_type_size(sl_type_tag tag)
 {
-    return (tag < SL_TYPES_COUNT) ? type_sizes[tag] : 0;
+    return (tag < SL_TYPES_COUNT) ? sl_type_sizes[tag] : 0;
 }
 
 /* ---- Helper: Function that returns a name of the variable from a table ---- */
-static inline const char *sl_get_type_name(type_tag tag)
+static inline const char *sl_get_type_name(sl_type_tag tag)
 {
-    return (tag < SL_TYPES_COUNT) ? type_names[tag] : "UNKNOWN";
+    return (tag < SL_TYPES_COUNT) ? sl_type_names[tag] : "UNKNOWN";
 }
 
 /* ---- X-macro expansion safety ---- */
