@@ -27,7 +27,7 @@
     X(F32, float, f32, "32bit_float")                   \
     X(F64, double, f64, "64bit_float")                  \
     X(CF32, float complex, cf32, "32bit_complex_float") \
-    X(CF64, double complex, cf64, "64bti_complex_float")
+    X(CF64, double complex, cf64, "64bit_complex_float")
 
 /* ---- Type aliases ---- */
 #define X(tag, ctype, alias, name) typedef ctype alias;
@@ -52,6 +52,18 @@ static const uos type_sizes[] = {SL_TYPES};
 #define X(tag, ctype, alias, name) [TYPE_##tag] = name,
 static const char *type_names[] = {SL_TYPES};
 #undef X
+
+/* ---- Helper: Function that returns a size of the variable from a table ---- */
+static inline const uos sl_get_type_size(type_tag tag)
+{
+    return (tag < SL_TYPES_COUNT) ? type_sizes[tag] : 0;
+}
+
+/* ---- Helper: Function that returns a name of the variable from a table ---- */
+static inline const char *sl_get_type_name(type_tag tag)
+{
+    return (tag < SL_TYPES_COUNT) ? type_names[tag] : "UNKNOWN";
+}
 
 /* ---- X-macro expansion safety ---- */
 #ifdef X
