@@ -65,7 +65,6 @@ static inline const char *sl_get_type_name(type_tag tag)
     return (tag < SL_TYPES_COUNT) ? type_names[tag] : "UNKNOWN";
 }
 
-/*gfdsghpdfu*/
 /* ---- X-macro expansion safety ---- */
 #ifdef X
 #undef X
