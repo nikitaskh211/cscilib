@@ -53,13 +53,15 @@ static const uos sl_type_sizes[] = {SL_TYPES};
 static const char *sl_type_names[] = {SL_TYPES};
 #undef X
 
-/* ---- Helper: Function that returns a size of the variable from a table ---- */
+/* ---- Function implementations ---- */
+
+/* ==== Helper: Function that returns a size of the variable from a table ==== */
 static inline const uos sl_get_type_size(sl_type_tag tag)
 {
     return (tag < SL_TYPES_COUNT) ? sl_type_sizes[tag] : 0;
 }
 
-/* ---- Helper: Function that returns a name of the variable from a table ---- */
+/* ==== Helper: Function that returns a name of the variable from a table ==== */
 static inline const char *sl_get_type_name(sl_type_tag tag)
 {
     return (tag < SL_TYPES_COUNT) ? sl_type_names[tag] : "UNKNOWN";

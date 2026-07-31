@@ -38,8 +38,11 @@ typedef enum
 #undef X
 
 /* ---- Bit-mask macros for array flags ---- */
-#define X(flag) static const u32 flag = (1U << INDEX_##flag);
-SL_ARRAY_FLAGS
+#define X(flag) flag##_BIT = (1U << INDEX_##flag),
+typedef enum
+{
+    SL_ARRAY_FLAGS
+} sl_array_flags;
 #undef X
 
 /* ---- String representations of array flags ---- */
@@ -55,6 +58,7 @@ typedef struct
     atomic_uintptr_t ref_count; /* ==== Atomic reference counter ====*/
 
     sl_type_tag dtype; /* ==== The type of data stored in an array ==== */
+    u32 bitwise_flags; /* ==== A list of 32 switches for flags ==== */
     uos dtype_size;    /* ==== The size of one data entry stored in an array ==== */
 
     uos rank;    /* ==== The rank of an array ==== */
@@ -63,14 +67,12 @@ typedef struct
 
     uos offset;         /* ==== Offset in BYTES from raw data to the first logical element ==== */
     uos total_elements; /* ==== Cached total number of elements (product of all shape elements) ==== */
-
-    u32 bitwise_flags; /* ==== A list of 32 switches for flags ==== */
 } sl_array;
 
 /* ---- Function prototypes ---- */
 
 /* ==== Creates a new multi-dimensional array with flags ==== */
-sl_array *sl_array_create(sl_type_tag dtype, uos rank, const uos *shape, ...);
+sl_array *sl_array_create(sl_type_tag dtype, uos rank, const uos *shape, u32 flag_bitmask);
 
 /* ==== Creates a zero-copy view (slice) of an existing array ====*/
 sl_array *sl_array_view(const sl_array *src, uos desired_rank, const uos *offset_ptr, const uos *new_stride);
