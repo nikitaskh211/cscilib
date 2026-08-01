@@ -40,4 +40,6 @@ csl_array_t *csl_wrap_array_impl(void *buf_data, csl_dtype_t dtype, const size_t
 
 csl_array_t *csl_slice_array_impl(csl_array_t *src, size_t offset, const size_t *shape, const size_t *stride, size_t rank);
 
+void csl_destroy_array_impl(csl_array_t *src);
+
 #endif // !CSL_ARRAY_H
